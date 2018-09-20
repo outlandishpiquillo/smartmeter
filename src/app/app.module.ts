@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NgxQRCodeModule} from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner'
+import { HTTP } from '@ionic-native/http';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
@@ -40,7 +41,8 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    HTTP
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,6 +57,7 @@ export const firebaseConfig = {
     SplashScreen,
     AngularFireDatabase,
     BarcodeScanner,
+    HTTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
