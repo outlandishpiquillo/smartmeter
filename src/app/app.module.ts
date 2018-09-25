@@ -12,19 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NgxQRCodeModule} from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner'
-
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-
-export const firebaseConfig = { 
-    apiKey: "AIzaSyDAvk1mSjyhnB4lkup_iKNt_aFhwXVYf5I",
-    authDomain: "smartmeternyp.firebaseapp.com",
-    databaseURL: "https://smartmeternyp.firebaseio.com",
-    projectId: "smartmeternyp",
-    storageBucket: "smartmeternyp.appspot.com",
-    messagingSenderId: "244658578869"
-  };
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,11 +24,9 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

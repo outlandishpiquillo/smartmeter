@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../home/home';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,7 +20,7 @@ export class LoginPage {
   @ViewChild('email') email;
   @ViewChild('password') password;
 
-  constructor(private alertCtrl: AlertController, private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -36,15 +36,25 @@ export class LoginPage {
   }
 
   sign() {
-    //this.fire.auth.sendPasswordResetEmail()
-    this.fire.auth.signInWithEmailAndPassword(this.email.value, this.password.value)
-    .then(data => {
-      this.alert('Success', 'You are logged in');
-      this.navCtrl.setRoot( HomePage );
-      //user is logged in
-    })
-    .catch(error => {
-      this.alert('Error', error.message);
-    })
+    let postData = {
+      "email": this.email.value,
+      "password": this.password.value
+    }
+
+    this.http.post("https://ljwycwebserver.azurewebsites.net/api/Auth", postData, {headers: {'Content-Type': 'application/json'}})
+      .subscribe(data => {
+        if (data == "Success")
+        {
+          this.alert('Success', 'You are logged in');
+          this.navCtrl.setRoot( HomePage );
+        }
+        else
+        {
+          this.alert('Error', 'Wrong credentials, please try again');
+        }
+        
+      }, error => {
+          this.alert('Error', 'Wrong credentials, please try again');
+      });
   }
 }
