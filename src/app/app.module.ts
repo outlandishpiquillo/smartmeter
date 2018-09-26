@@ -39,7 +39,6 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    AngularFireDatabase,
     BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

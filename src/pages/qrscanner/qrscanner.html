@@ -17,17 +17,33 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-	<button ion-button block icon-left (click)="scanCode(scannedcode)">
+	<button ion-button block color="brown" icon-left (click)="scanCode(scannedcode)">
 	<ion-icon name="qr-scanner">
     Scan Code
   </ion-icon>
   </button>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header *ngIf="scannedcode">
         Building Info
     </ion-card-header>
     <ion-card-content *ngIf="scannedcode">
-      {{ scannedcode }}
-    </ion-card-content> 
+      <ion-label>Meter Id</ion-label>
+      <ion-label>{{ meterId }}</ion-label>
+      <ion-label>Building No.</ion-label>
+      <ion-label>{{ blkNo }}</ion-label>
+      <ion-label>Unit No.</ion-label>
+      <ion-label>{{ unitNo }}</ion-label>
+      <ion-list radio-group>
+      <ion-item>
+        <ion-label>Ad Hoc</ion-label>
+        <ion-radio checked="true" value="Ad Hoc"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Monthly</ion-label>
+        <ion-radio value="Monthly"></ion-radio>
+      </ion-item>
+    </ion-list>
+      <button ion-button block color="brown" (click)="next()">Next</button>
+    </ion-card-content>
   </ion-card>	
 </ion-content>

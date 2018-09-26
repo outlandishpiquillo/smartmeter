@@ -17,6 +17,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class QrscannerPage {
 
 	scannedcode = null;
+  meterId = null;
+  blkNo = null;
+  unitNo = null;
 
   constructor(private barcodeScanner: BarcodeScanner, public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -26,10 +29,12 @@ export class QrscannerPage {
   }
 
   scanCode(scannedcode) {
-  	this.barcodeScanner.scan().then(barcodeData => {
-  		this.scannedcode = barcodeData.text;
-  	})
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.scannedcode = barcodeData.text;
+      this.meterId = this.scannedcode.split(" ")[0];
+      this.blkNo = this.scannedcode.split(" ")[1];
+      this.unitNo = this.scannedcode.split(" ")[2];
+    })
   }
 }
-  
 
